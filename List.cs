@@ -18,6 +18,11 @@ namespace Containers.List
             _list = new T[InitialSize];
             maxSize = InitialSize;
         }
+        public List(IEnumerable<T> list)
+        {
+            foreach (var value in list)
+                Add(value);
+        }
         #endregion
 
         #region Public functions

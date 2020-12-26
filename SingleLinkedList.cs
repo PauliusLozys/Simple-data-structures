@@ -16,6 +16,11 @@ namespace Containers.SingleLinkedList
         {
             Head = Tail = current = null;
         }
+        public SingleLinkedList(IEnumerable<T> list)
+        {
+            foreach (var value in list)
+                AddLast(value);
+        }
         #endregion
 
         #region Public functions
