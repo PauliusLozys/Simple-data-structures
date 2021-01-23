@@ -44,7 +44,7 @@ namespace Containers.List
         }
         public bool RemoveFirst()
         {
-            return Remove(0);
+            return RemoveAt(0);
         }
         public bool RemoveLast()
         {
@@ -52,21 +52,24 @@ namespace Containers.List
                 return false;
 
             _list[--Count] = default;
+            CheckToDownsize();
             return true;
         }
-        public bool Remove(int index)
+        public bool RemoveAt(int index)
         {
+            if (index >= Count || Count < 0)
+                return false;
+
             if (index == Count - 1)
                 return RemoveLast();
 
-            if (index >= Count)
-                return false;
 
             for (int i = index; i < Count - 1; i++)
             {
                 _list[i] = _list[i + 1];
             }
             _list[--Count] = default;
+            CheckToDownsize();
             return true;
         }
         public bool RemoveValue(T value)
@@ -74,7 +77,7 @@ namespace Containers.List
             for (int i = 0; i < Count; i++)
             {
                 if (_list[i].Equals(value))
-                    return Remove(i);
+                    return RemoveAt(i);
             }
             return false;
         }
@@ -135,6 +138,11 @@ namespace Containers.List
         #endregion
 
         #region Inner functions
+        private void CheckToDownsize()
+        {
+            if ((float)Count /maxSize <= 0.4)
+                Resize(maxSize / 2);
+        }
         private void BubbleSort()
         {
             for (int i = 0; i < Count - 1; i++)
