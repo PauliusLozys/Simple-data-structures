@@ -50,6 +50,7 @@ namespace Containers.SingleLinkedList
             if (Head == Tail)
             {
                 Head = Tail = null;
+                Count--;
                 return true;
             }
             current = Head;
@@ -65,6 +66,7 @@ namespace Containers.SingleLinkedList
             if (Head == Tail)
             {
                 Head = Tail = null;
+                Count--;
                 return true;
             }
 
