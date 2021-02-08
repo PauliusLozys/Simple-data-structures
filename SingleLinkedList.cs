@@ -134,6 +134,21 @@ namespace Containers.SingleLinkedList
             Head = Tail = current = null;
             Count = 0;
         }
+        public void ReverseList()
+        {
+            current = Head;
+            SingleLinkedListNode<T> prev = null;
+            
+            while (current != null)
+            {
+                var next = current.Next;
+                current.Next = prev;
+                prev = current;
+                current = next;
+            }
+            (Tail, Head) = (Head, Tail); // Swap Head and Tail nodes
+            current = null;
+        }
         public IEnumerator<T> GetEnumerator()
         {
             for (current = Head; current != null; current = current.Next)
