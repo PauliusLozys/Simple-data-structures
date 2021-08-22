@@ -7,16 +7,16 @@ namespace Containers.List
     {
         #region Fields
         private T[] _list;
-        private int maxSize = 8;
+        private int _maxSize = 8;
         public int Count { get; private set; } = 0;
         #endregion
 
         #region Constructors
-        public List() => _list = new T[maxSize];
+        public List() => _list = new T[_maxSize];
         public List(int InitialSize) 
         {
             _list = new T[InitialSize];
-            maxSize = InitialSize;
+            _maxSize = InitialSize;
         }
         public List(IEnumerable<T> list)
         {
@@ -33,8 +33,8 @@ namespace Containers.List
         }
         public void Add(T value)
         {
-            if (Count >= maxSize) // Needs to be resized
-                Resize(maxSize * 2);       
+            if (Count >= _maxSize) // Needs to be resized
+                Resize(_maxSize * 2);       
             _list[Count++] = value;
         }
         public void Add(IEnumerable<T> list)
@@ -88,8 +88,8 @@ namespace Containers.List
                 _list[i] = default;
             }
 
-            maxSize = newArraySize;
-            _list = new T[maxSize];
+            _maxSize = newArraySize;
+            _list = new T[_maxSize];
             Count = 0;
         }
         public bool Contains(T value)
@@ -111,6 +111,10 @@ namespace Containers.List
                     MergeSort();
                     break;
             }
+        }
+        public ArraySlice<T> Slice(int start, int length)
+        {
+            return new ArraySlice<T>(start, length, this);
         }
         public override string ToString()
         {
@@ -140,8 +144,8 @@ namespace Containers.List
         #region Inner functions
         private void CheckToDownsize()
         {
-            if ((float)Count /maxSize <= 0.4)
-                Resize(maxSize / 2);
+            if ((float)Count /_maxSize <= 0.4)
+                Resize(_maxSize / 2);
         }
         private void BubbleSort()
         {
@@ -196,7 +200,7 @@ namespace Containers.List
         private void Resize(int newSize)
         {
             var newList = new T[newSize];
-            maxSize = newSize;
+            _maxSize = newSize;
 
             for (int i = 0; i < Count; i++)
             {
