@@ -7,14 +7,14 @@ namespace Containers.SingleLinkedList
         #region Fields
         public SingleLinkedListNode<T> Head { get; private set; }
         public  SingleLinkedListNode<T> Tail { get; private set; }
-        private SingleLinkedListNode<T> current;
+        private SingleLinkedListNode<T> _current;
         public int Count { get; private set; } = 0;
         #endregion
 
         #region Constructors
         public SingleLinkedList()
         {
-            Head = Tail = current = null;
+            Head = Tail = _current = null;
         }
         public SingleLinkedList(IEnumerable<T> list)
         {
@@ -53,9 +53,9 @@ namespace Containers.SingleLinkedList
                 Count--;
                 return true;
             }
-            current = Head;
+            _current = Head;
             Head = Head.Next;
-            current.Next = null;
+            _current.Next = null;
             Count--;
             return true;
         }
@@ -70,12 +70,12 @@ namespace Containers.SingleLinkedList
                 return true;
             }
 
-            current = Head;
-            while (current.Next != Tail)
-                current = current.Next;
+            _current = Head;
+            while (_current.Next != Tail)
+                _current = _current.Next;
             
-            current.Next = null;
-            Tail = current;
+            _current.Next = null;
+            Tail = _current;
             Count--;
             return true;
         }
@@ -85,29 +85,29 @@ namespace Containers.SingleLinkedList
                 return false;
             if (Head.Value.Equals(value))
             {
-                current = Head;
+                _current = Head;
                 Head = Head.Next;
                 if (Count == 1) // Point the Tail pointer to the head (null)
                     Tail = Head;
-                current.Next = null;
-                current = null;
+                _current.Next = null;
+                _current = null;
                 Count--;
                 return true;
             }
 
             var previous = Head;
-            current = Head.Next;
-            while (current != null && !current.Value.Equals(value))
+            _current = Head.Next;
+            while (_current != null && !_current.Value.Equals(value))
             {
-                previous = current;
-                current = current.Next;
+                previous = _current;
+                _current = _current.Next;
             }
-            if (current is null)
+            if (_current is null)
                 return false;
 
-            previous.Next = current.Next;
-            current.Next = null;
-            current = null;
+            previous.Next = _current.Next;
+            _current.Next = null;
+            _current = null;
             Count--;
             return true;
         }
@@ -124,44 +124,44 @@ namespace Containers.SingleLinkedList
         {
             // The purpose of this while loop is to break each node's link to the next node
             // This is done to make the GC detect unused objects more efficiently
-            current = Head.Next;
-            while (current != null)
+            _current = Head.Next;
+            while (_current != null)
             {
                 Head.Next = null;
-                Head = current;
-                current = current.Next;
+                Head = _current;
+                _current = _current.Next;
             }
-            Head = Tail = current = null;
+            Head = Tail = _current = null;
             Count = 0;
         }
         public void ReverseList()
         {
-            current = Head;
+            _current = Head;
             SingleLinkedListNode<T> prev = null;
             
-            while (current != null)
+            while (_current != null)
             {
-                var next = current.Next;
-                current.Next = prev;
-                prev = current;
-                current = next;
+                var next = _current.Next;
+                _current.Next = prev;
+                prev = _current;
+                _current = next;
             }
             (Tail, Head) = (Head, Tail); // Swap Head and Tail nodes
-            current = null;
+            _current = null;
         }
         public IEnumerator<T> GetEnumerator()
         {
-            for (current = Head; current != null; current = current.Next)
-                yield return current.Value;
+            for (_current = Head; _current != null; _current = _current.Next)
+                yield return _current.Value;
         }
         public override string ToString()
         {
             System.Text.StringBuilder buffer = new();
             buffer.Append('[');
 
-            for (current = Head; current != null ; current = current.Next)
+            for (_current = Head; _current != null ; _current = _current.Next)
             {
-                buffer.Append(current.Value);
+                buffer.Append(_current.Value);
                 buffer.Append("->");
             }
 

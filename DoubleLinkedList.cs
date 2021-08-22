@@ -8,13 +8,13 @@ namespace Containers.DoubleLinkedList
         public DoubleLinkedListNode<T> Head { get; private set; }
         public DoubleLinkedListNode<T> Tail { get; private set; }
         public int Count { get; private set; } = 0;
-        private DoubleLinkedListNode<T> current;
+        private DoubleLinkedListNode<T> _current;
         #endregion
 
         #region Constructors
         public DoubleLinkedList()
         {
-            Head = Tail = current = null;
+            Head = Tail = _current = null;
         }
         public DoubleLinkedList(IEnumerable<T> list)
         {
@@ -59,12 +59,12 @@ namespace Containers.DoubleLinkedList
                 return true;
             }
 
-            current = Head.Next;
-            if (current is not null)
-                current.Previous = null;
+            _current = Head.Next;
+            if (_current is not null)
+                _current.Previous = null;
             
             Head.Next = null;
-            Head = current;
+            Head = _current;
             Count--;
             return true;
         }
@@ -80,41 +80,41 @@ namespace Containers.DoubleLinkedList
                 return true;
             }
 
-            current = Tail.Previous;
-            if (current is not null)
-                current.Next = null;
+            _current = Tail.Previous;
+            if (_current is not null)
+                _current.Next = null;
 
             Tail.Previous = null;
-            Tail = current;
+            Tail = _current;
             Count--;
             return true;
         }
         public void Clear()
         {
-            current = Head.Next;
-            while (current != null)
+            _current = Head.Next;
+            while (_current != null)
             {
                 Head.Next = null;
                 Head.Previous = null;
-                Head = current;
-                current = current.Next;
+                Head = _current;
+                _current = _current.Next;
             }
-            Head = Tail = current = null;
+            Head = Tail = _current = null;
             Count = 0;
         }
         public IEnumerator<T> GetEnumerator()
         {
-            for (current = Head; current != null; current = current.Next)
-                yield return current.Value;
+            for (_current = Head; _current != null; _current = _current.Next)
+                yield return _current.Value;
         }
         public override string ToString()
         {
             System.Text.StringBuilder buffer = new();
             buffer.Append('[');
 
-            for (current = Head; current != null; current = current.Next)
+            for (_current = Head; _current != null; _current = _current.Next)
             {
-                buffer.Append(current.Value);
+                buffer.Append(_current.Value);
                 buffer.Append("<->");
             }
 
