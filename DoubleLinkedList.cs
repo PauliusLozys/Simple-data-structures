@@ -62,7 +62,7 @@ namespace Containers.DoubleLinkedList
             _current = Head.Next;
             if (_current is not null)
                 _current.Previous = null;
-            
+
             Head.Next = null;
             Head = _current;
             Count--;

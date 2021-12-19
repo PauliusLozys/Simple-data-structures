@@ -3,7 +3,7 @@
 namespace Containers.List
 {
     public class List<T>
-        where T: System.IComparable<T>, System.IEquatable<T>
+        where T : System.IComparable<T>, System.IEquatable<T>
     {
         #region Fields
         private T[] _list;
@@ -13,7 +13,7 @@ namespace Containers.List
 
         #region Constructors
         public List() => _list = new T[_maxSize];
-        public List(int InitialSize) 
+        public List(int InitialSize)
         {
             _list = new T[InitialSize];
             _maxSize = InitialSize;
@@ -34,7 +34,7 @@ namespace Containers.List
         public void Add(T value)
         {
             if (Count >= _maxSize) // Needs to be resized
-                Resize(_maxSize * 2);       
+                Resize(_maxSize * 2);
             _list[Count++] = value;
         }
         public void Add(IEnumerable<T> list)
@@ -125,7 +125,7 @@ namespace Containers.List
                 buffer.Append(_list[i]);
                 buffer.Append(", ");
             }
-            if(buffer.Length - 2 >= 0) 
+            if (buffer.Length - 2 >= 0)
                 buffer.Remove(buffer.Length - 2, 2);
 
             buffer.Append(']');
@@ -144,7 +144,7 @@ namespace Containers.List
         #region Inner functions
         private void CheckToDownsize()
         {
-            if ((float)Count /_maxSize <= 0.4)
+            if ((float)Count / _maxSize <= 0.4)
                 Resize(_maxSize / 2);
         }
         private void BubbleSort()
@@ -207,7 +207,7 @@ namespace Containers.List
                 newList[i] = _list[i];
             }
             _list = newList;
-        }       
+        }
         #endregion
     }
 }

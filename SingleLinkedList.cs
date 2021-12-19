@@ -6,7 +6,7 @@ namespace Containers.SingleLinkedList
     {
         #region Fields
         public SingleLinkedListNode<T> Head { get; private set; }
-        public  SingleLinkedListNode<T> Tail { get; private set; }
+        public SingleLinkedListNode<T> Tail { get; private set; }
         private SingleLinkedListNode<T> _current;
         public int Count { get; private set; } = 0;
         #endregion
@@ -82,7 +82,7 @@ namespace Containers.SingleLinkedList
             _current = Head;
             while (_current.Next != Tail)
                 _current = _current.Next;
-            
+
             _current.Next = null;
             Tail = _current;
             Count--;
@@ -147,7 +147,7 @@ namespace Containers.SingleLinkedList
         {
             _current = Head;
             SingleLinkedListNode<T> prev = null;
-            
+
             while (_current != null)
             {
                 var next = _current.Next;
@@ -168,7 +168,7 @@ namespace Containers.SingleLinkedList
             System.Text.StringBuilder buffer = new();
             buffer.Append('[');
 
-            for (_current = Head; _current != null ; _current = _current.Next)
+            for (_current = Head; _current != null; _current = _current.Next)
             {
                 buffer.Append(_current.Value);
                 buffer.Append("->");

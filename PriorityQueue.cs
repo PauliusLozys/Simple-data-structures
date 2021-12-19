@@ -7,7 +7,7 @@ namespace Containers.PriorityQueue
         where Tp : System.IComparable<Tp>, System.IEquatable<Tp>
     {
         #region Fields
-        private readonly SingleLinkedList<(Te Element,Tp Priority)> _internalList;
+        private readonly SingleLinkedList<(Te Element, Tp Priority)> _internalList;
         public int Count { get => _internalList.Count; }
         #endregion
 
@@ -23,20 +23,20 @@ namespace Containers.PriorityQueue
         {
             var current = _internalList.Head;
 
-            if(current is null)
+            if (current is null)
             {
                 _internalList.AddFirst((element, priority));
                 return;
             }
 
-            if(priority.CompareTo(current.Value.Priority) < 0) // if priority smaller than head
+            if (priority.CompareTo(current.Value.Priority) < 0) // if priority smaller than head
             {
                 _internalList.AddFirst((element, priority));
             }
 
-            while(current.Next != null)
+            while (current.Next != null)
             {
-                if(priority.CompareTo(current.Next.Value.Priority) < 0)
+                if (priority.CompareTo(current.Next.Value.Priority) < 0)
                 {
                     SingleLinkedListNode<(Te, Tp)> node = new SingleLinkedListNode<(Te, Tp)>((element, priority), null);
                     _internalList.AddAfter(current, node);
