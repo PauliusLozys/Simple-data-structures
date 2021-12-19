@@ -43,6 +43,14 @@ namespace Containers.SingleLinkedList
             Tail = tmp;
             Count++;
         }
+
+        public void AddAfter(SingleLinkedListNode<T> currentNode, SingleLinkedListNode<T> nextNode)
+        {
+            nextNode.Next = currentNode.Next;
+            currentNode.Next = nextNode;
+            Count++;
+        }
+
         public bool RemoveFirst()
         {
             if (Head is null)
@@ -59,6 +67,7 @@ namespace Containers.SingleLinkedList
             Count--;
             return true;
         }
+
         public bool RemoveLast()
         {
             if (Head is null)
