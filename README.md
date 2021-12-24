@@ -3,3 +3,4 @@ Includes these data structures:
 * Dynamic list
 * SingleLinked list
 * DoubleLinked List
+* Priority Queue
