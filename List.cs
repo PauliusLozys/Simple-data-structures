@@ -107,8 +107,8 @@ namespace Containers.List
                 case SortingStrategy.BubbleSort:
                     BubbleSort();
                     break;
-                case SortingStrategy.MergeSort:
-                    MergeSort();
+                case SortingStrategy.HeapSort:
+                    HeapSort();
                     break;
             }
         }
@@ -162,7 +162,7 @@ namespace Containers.List
                 }
             }
         }
-        private void MergeSort()
+        private void HeapSort()
         {
             for (int i = Count / 2 - 1; i >= 0; i--)
                 Heapify(Count, i);

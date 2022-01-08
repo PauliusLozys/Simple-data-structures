@@ -3,6 +3,6 @@
     public enum SortingStrategy
     {
         BubbleSort,
-        MergeSort
+        HeapSort
     }
 }
