@@ -73,7 +73,7 @@ namespace Containers.List
             CheckToDownsize();
             return true;
         }
-        public bool RemoveValue(T value)
+        public bool RemoveFirstFoundValue(T value)
         {
             for (int i = 0; i < Count; i++)
             {
