@@ -188,7 +188,7 @@ namespace Containers.SingleLinkedList
         public T Value { get; set; }
         public SingleLinkedListNode<T> Next { get; set; }
 
-        public SingleLinkedListNode(T value, SingleLinkedListNode<T> next)
+        public SingleLinkedListNode(T value, SingleLinkedListNode<T> next = null)
         {
             Value = value;
             Next = next;
