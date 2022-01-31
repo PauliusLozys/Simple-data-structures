@@ -19,6 +19,7 @@ namespace Containers.List
             _maxSize = InitialSize;
         }
         public List(IEnumerable<T> list)
+            :this()
         {
             foreach (var value in list)
                 Add(value);
