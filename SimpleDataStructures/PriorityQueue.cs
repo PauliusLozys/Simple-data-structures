@@ -32,6 +32,7 @@ namespace Containers.PriorityQueue
             if (priority.CompareTo(current.Value.Priority) < 0) // if priority smaller than head
             {
                 _internalList.AddFirst((element, priority));
+                return;
             }
 
             while (current.Next != null)
